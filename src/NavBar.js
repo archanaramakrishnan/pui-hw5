@@ -31,8 +31,8 @@ class NavBar extends Component {
           <img className="logo" src={logo} alt="logo of the bun bun bake shop which is a doodle of a cinammon roll"/>
           <div className="navbar">
             <div>
-              <a>PRODUCTS </a>
-              <button className="navbar-cart" onClick={this.toggleCart}>CART</button>
+              <a >PRODUCTS </a>
+              <a className="navbar-cart" onClick={this.toggleCart}>CART</a>
             </div>
             <hr/>
             <p className="tagline">Our hand-made cinnamon rolls</p>    

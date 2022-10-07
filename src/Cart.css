@@ -15,3 +15,11 @@
   height: 160px;
   margin-right: 50px;
 }
+
+.align-left {
+	float: left;
+}
+
+.align-right {
+	float: right;
+}

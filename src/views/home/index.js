@@ -19,6 +19,7 @@ class HomePage extends Component {
       cartTotalPrice: 0,
       currentRoll: {},
       searchTerm: "",
+      sortTerm: "Name",
       rollData: [
         {
           name: "Original cinammon roll",
@@ -58,7 +59,8 @@ class HomePage extends Component {
         }
       ]
     };
-    // this.state.displayRolls = this.state.rollData;
+
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
   showCart = (rollIndex, rollName, glazing, packSize, totalPrice) => {
@@ -77,6 +79,14 @@ class HomePage extends Component {
       currentRoll: roll
     }));
   }
+
+  handleSortChange = (event) => {
+    const selectedSort = event.target.value;
+    this.setState(prevState => ({
+      ...prevState,
+      sortTerm: selectedSort
+    }));
+  };
 
   removeFromCart = (rollIndex) => {
     this.setState(prevState => ({     
@@ -103,15 +113,27 @@ class HomePage extends Component {
             rollData= {this.state.rollData}
             removeFromCart= {this.removeFromCart}
           />
-        <div className="search">
-          <input type="text" id="userInput"/>
-          <button onClick={this.handleSearch}>Search</button>
-        </div>
+          <div id="textbox">
+            <div className="search align-left">
+              <input type="text" id="userInput"/>
+              <button onClick={this.handleSearch}>Search</button>
+            </div>
+            <div className="options align-right">
+            <p></p>Sort by:<select name="sort" value={this.state.sortTerm} onChange={this.handleSortChange}>
+                <option value="Name">Name</option>
+                <option value="Base Price">Base Price</option>
+              </select>
+            </div>
+          </div>
+          <br></br>
+        
+        
                   
         <div className="list">
+          {console.log("SORT", this.state.sortTerm)}
           {this.state.rollData.map(
             (roll, index) => {
-              if ((this.state.searchTerm === "") || (roll.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
+              if ((this.state.searchTerm === "") || (roll.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()).sort((roll1, roll2) => roll1.(this.state.sortTerm) > roll2.this.state.sortTerm ? 1 : -1))) {
                 return <div>
                   <Roll
                   rollIndex={index}

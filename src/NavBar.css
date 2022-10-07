@@ -1,15 +1,3 @@
-
-
-.cart {
-  visibility: collapse; 
-  text-align: left;
-}
-
-.cart.expanded {
-  visibility: visible;
-  font-size: x-large;
-}
-
 #cart-status {
   padding-top: 12px;
   padding-right: 350px;
