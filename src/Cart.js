@@ -4,7 +4,6 @@ import './Roll.css';
 
 class Cart extends Component {
   render() {
-    console.log("this.props.cart", this.props.cart)
     return (
         <div>
           <hr/>

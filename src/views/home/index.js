@@ -18,6 +18,7 @@ class HomePage extends Component {
       cart: [],
       cartTotalPrice: 0,
       currentRoll: {},
+      searchTerm: "",
       rollData: [
         {
           name: "Original cinammon roll",
@@ -55,9 +56,9 @@ class HomePage extends Component {
           imageURL: strawberry,
           index: 5
         }
-      ],
-  
-    }
+      ]
+    };
+    // this.state.displayRolls = this.state.rollData;
   }
 
   showCart = (rollIndex, rollName, glazing, packSize, totalPrice) => {
@@ -85,12 +86,15 @@ class HomePage extends Component {
     }))
   }
 
-  search = () => {
-    
+  handleSearch = () => {
+    let input = document.getElementById("userInput").value;
+    this.setState(prevState => ({
+      ...prevState,
+      searchTerm: input
+    }))
   }
 
   render() {
-    console.log("this.state.currentRoll", this.state.currentRoll)
     return (
       <div className="App">
           <NavBar
@@ -100,26 +104,30 @@ class HomePage extends Component {
             removeFromCart= {this.removeFromCart}
           />
         <div className="search">
-          <input type="text"></input>
-          <button type="submit" onSubmit={this.search}>Search</button>
+          <input type="text" id="userInput"/>
+          <button onClick={this.handleSearch}>Search</button>
         </div>
+                  
         <div className="list">
-          {this.state.rollData.map((roll, index) => 
-            {
-              return (
-                <div>
+          {this.state.rollData.map(
+            (roll, index) => {
+              if ((this.state.searchTerm === "") || (roll.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
+                return <div>
                   <Roll
-                    rollIndex={index}
-                    imageURL={roll.imageURL}
-                    rollName={roll.name} 
-                    price={roll.price}
-                    addToCart={this.showCart}  />
-                  </div>
-                )
-            })
-          }
+                  rollIndex={index}
+                  imageURL={roll.imageURL}
+                  rollName={roll.name} 
+                  price={roll.price}
+                  addToCart={this.showCart}/>
+                </div>
+              } 
+              else {
+                return <div></div>
+              }
+            }
+          )}
         </div>
-    </div>
+      </div>
     );
   }
 }
