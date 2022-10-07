@@ -133,7 +133,7 @@ class HomePage extends Component {
           {console.log("SORT", this.state.sortTerm)}
           {this.state.rollData.map(
             (roll, index) => {
-              if ((this.state.searchTerm === "") || (roll.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()).sort((roll1, roll2) => roll1.(this.state.sortTerm) > roll2.this.state.sortTerm ? 1 : -1))) {
+              if ((this.state.searchTerm === "") || (roll.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
                 return <div>
                   <Roll
                   rollIndex={index}
