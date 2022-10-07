@@ -85,6 +85,10 @@ class HomePage extends Component {
     }))
   }
 
+  search = () => {
+    
+  }
+
   render() {
     console.log("this.state.currentRoll", this.state.currentRoll)
     return (
@@ -97,49 +101,24 @@ class HomePage extends Component {
           />
         <div className="search">
           <input type="text"></input>
-          <button type="submit">Search</button>
+          <button type="submit" onSubmit={this.search}>Search</button>
         </div>
         <div className="list">
-        <Roll
-          rollIndex={0}
-          imageURL={this.state.rollData[0].imageURL}
-          rollName={this.state.rollData[0].name} 
-          price={this.state.rollData[0].price}
-          addToCart={this.showCart}  /> 
-        <Roll 
-          rollIndex={1}
-          imageURL={this.state.rollData[1].imageURL}
-          rollName={this.state.rollData[1].name} 
-          price={this.state.rollData[1].price}
-          addToCart={this.showCart}  /> 
-        <Roll 
-          rollIndex={2}
-          imageURL={this.state.rollData[2].imageURL}
-          rollName={this.state.rollData[2].name} 
-          price={this.state.rollData[2].price}
-          addToCart={this.showCart}    />
-      </div>
-
-      <div className="list">
-        <Roll 
-          rollIndex={3}
-          imageURL={this.state.rollData[3].imageURL}
-          rollName={this.state.rollData[3].name} 
-          price={this.state.rollData[3].price}
-          addToCart={this.showCart}    />
-        <Roll 
-          rollIndex={4}
-          imageURL={this.state.rollData[4].imageURL}
-          rollName={this.state.rollData[4].name} 
-          price={this.state.rollData[4].price}
-          addToCart={this.showCart}    />
-        <Roll 
-          rollIndex={5}
-          imageURL={this.state.rollData[5].imageURL}
-          rollName={this.state.rollData[5].name} 
-          price={this.state.rollData[5].price}
-          addToCart={this.showCart}    />
-      </div>
+          {this.state.rollData.map((roll, index) => 
+            {
+              return (
+                <div>
+                  <Roll
+                    rollIndex={index}
+                    imageURL={roll.imageURL}
+                    rollName={roll.name} 
+                    price={roll.price}
+                    addToCart={this.showCart}  />
+                  </div>
+                )
+            })
+          }
+        </div>
     </div>
     );
   }

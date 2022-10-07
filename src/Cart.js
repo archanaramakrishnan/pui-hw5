@@ -13,7 +13,6 @@ class Cart extends Component {
           <div className={this.props.className}>
             {this.props.cart.map((roll) => 
               {
-                console.log(roll)
                 return (
                     <div>
                       <img src={roll.imageURL} className="roll-picture cart-image" alt={`a ${roll.rollName}`} />
@@ -21,7 +20,6 @@ class Cart extends Component {
                       <div>Glazing: {roll.glaze}</div>
                       <div>Pack size: {roll.pack}</div>
                       <div>${roll.price}</div>
-                      {console.log("IN CART RN", roll.index)}
                       <button type="button" onClick={() => this.props.removeFromCart(roll.index)}> Remove </button>
                     </div>
                   )
