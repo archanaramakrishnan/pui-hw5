@@ -66,19 +66,22 @@ class HomePage extends Component {
       glaze: glazing, 
       pack: packSize,
       price: totalPrice,
-      imageURL: this.state.rollData[rollIndex].imageURL
+      imageURL: this.state.rollData[rollIndex].imageURL,
+      index: this.state.cart.length
     }
     this.setState(prevState => ({
       ...prevState,
-      cartTotalPrice: prevState.cartTotalPrice + Number(roll.price)
-    }));
-    this.setState(prevState => ({
-      ...prevState,
-      cart: [...prevState.cart, roll]
-    }))
-    this.setState(prevState => ({
-      ...prevState,
+      cartTotalPrice: prevState.cartTotalPrice + Number(roll.price),
+      cart: [...prevState.cart, roll],
       currentRoll: roll
+    }));
+  }
+
+  removeFromCart = (rollIndex) => {
+    this.setState(prevState => ({     
+      ...prevState,	
+      cart: (this.state.cart.length === 1 ) ? [] : prevState.cart.filter(roll => roll !== this.state.cart[rollIndex]),
+      cartTotalPrice: (this.state.cart.length === 1 ) ? 0 : prevState.cartTotalPrice - this.state.cart[rollIndex].price
     }))
   }
 
@@ -90,7 +93,7 @@ class HomePage extends Component {
             totalPrice= {this.state.cartTotalPrice.toFixed(2)}
             cart= {this.state.cart}
             rollData= {this.state.rollData}
-            removeFromCart= {this.props.removeFromCart}
+            removeFromCart= {this.removeFromCart}
           />
         <div className="search">
           <input type="text"></input>

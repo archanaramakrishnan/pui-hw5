@@ -21,7 +21,8 @@ class Cart extends Component {
                       <div>Glazing: {roll.glaze}</div>
                       <div>Pack size: {roll.pack}</div>
                       <div>${roll.price}</div>
-                      <button type="button" onClick={() => this.props.removeFromCart(roll.rollIndex)}> Remove </button>
+                      {console.log("IN CART RN", roll.index)}
+                      <button type="button" onClick={() => this.props.removeFromCart(roll.index)}> Remove </button>
                     </div>
                   )
               })
