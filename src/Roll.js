@@ -22,8 +22,13 @@ class Roll extends Component {
         6 : 5,
         12 : 10
       }
+      // isPackSizePressed: {
+      //   1 : false,
+      //   3 : false,
+      //   6 : false,
+      //   12 : false
+      // }
     };
-    
     this.state.name = this.props.rollName;
     this.state.price = this.props.price;
     this.handleGlazingChange = this.handleGlazingChange.bind(this);
@@ -34,7 +39,13 @@ class Roll extends Component {
     const selectedPackSize = event.target.value;
     this.setState(prevState => ({
       ...prevState,
-      packSize: selectedPackSize
+      packSize: selectedPackSize,
+      //TODO: come back to 2.2 conditional styling
+      // Updating an object with setState in React: https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
+      // isPackSizePressed: {
+      //   ...prevState.isPackSizePressed,
+      //   selectedPackSize: true
+      // }
     }));
   };
 
@@ -75,6 +86,8 @@ class Roll extends Component {
         <div className="options-box">
           <p className="options-label">Pack size: </p>
           <div className="options">
+            {/* Conditional inline styling reference: https://stackoverflow.com/questions/35762351/correct-way-to-handle-conditional-styling-in-react */}
+
             <input type="radio" id={`size1-${this.props.rollIndex}`} className="size" value={1} onChange={this.handlePackSizeChange} name= {this.props.rollName} /> 
             <label htmlFor={`size1-${this.props.rollIndex}`}><div className="size"> 1 </div></label>
 
@@ -92,7 +105,7 @@ class Roll extends Component {
         <div className="options-box">
           <b className="options-label price-label">$ {this.calculatePrice()} </b>
           <div className="options">
-            <button type="button" className="add-to-cart" onClick={() => this.props.addToCart(this.state.name, this.state.glazing, this.state.packSize, this.calculatePrice())}> Add to cart </button> 
+            <button type="button" className="add-to-cart" onClick={() => this.props.addToCart(this.props.rollIndex, this.state.name, this.state.glazing, this.state.packSize, this.calculatePrice())}> Add to cart </button> 
             {/* onclick this.props.func(glaze, calculated price, packSize) */}
           </div>
         </div>

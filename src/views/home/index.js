@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../NavBar.css';
+import './index.css';
 import original from '../../products/original-cinnamon-roll.jpg';
 import apple from '../../products/apple-cinnamon-roll.jpg';
 import raisin from '../../products/raisin-cinnamon-roll.jpg';
@@ -21,45 +22,51 @@ class HomePage extends Component {
         {
           name: "Original cinammon roll",
           price: 2.49,
-          imageURL: "products/original-cinnamon-roll.jpg"
-          //TODO: add alt text here
+          imageURL: original,
+          index: 0
         },
         {
           name: "Apple cinammon roll",
           price: 3.49,
-          imageURL: "products/apple-cinnamon-roll.jpg"
+          imageURL: apple,
+          index: 1
         },
         {
           name: "Raisin cinammon roll",
           price: 2.99,
-          imageURL: "products/raisin-cinnamon-roll.jpg"
+          imageURL: raisin,
+          index: 2
         },
         {
           name: "Walnut cinammon roll",
           price: 3.49,
-          imageURL: "products/walnut-cinnamon-roll.jpg"
+          imageURL: walnut,
+          index: 3
         },
         {
           name: "Double-chocolate cinammon roll",
           price: 3.99,
-          imageURL: "products/double-chocolate-cinnamon-roll.jpg"
+          imageURL: chocolate,
+          index: 4
         },
         {
           name: "Strawberry cinammon roll",
           price: 3.99,
-          imageURL: "products/strawberry-cinnamon-roll.jpg"
+          imageURL: strawberry,
+          index: 5
         }
       ],
   
     }
   }
 
-  showCart = (rollName, glazing, packSize, totalPrice) => {
+  showCart = (rollIndex, rollName, glazing, packSize, totalPrice) => {
     const roll = {
       name: rollName,
       glaze: glazing, 
       pack: packSize,
-      price: totalPrice
+      price: totalPrice,
+      imageURL: this.state.rollData[rollIndex].imageURL
     }
     this.setState(prevState => ({
       ...prevState,
@@ -73,11 +80,6 @@ class HomePage extends Component {
       ...prevState,
       currentRoll: roll
     }))
-
-    let popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-    
-    setTimeout(() => {popup.classList.toggle("show")}, 3000);
   }
 
   render() {
@@ -85,26 +87,31 @@ class HomePage extends Component {
     return (
       <div className="App">
           <NavBar
-            itemCount= {this.state.cart.length}
             totalPrice= {this.state.cartTotalPrice.toFixed(2)}
-            cartRoll= {this.state.currentRoll}
+            cart= {this.state.cart}
+            rollData= {this.state.rollData}
+            removeFromCart= {this.props.removeFromCart}
           />
+        <div className="search">
+          <input type="text"></input>
+          <button type="submit">Search</button>
+        </div>
         <div className="list">
         <Roll
           rollIndex={0}
-          imageURL={original}
+          imageURL={this.state.rollData[0].imageURL}
           rollName={this.state.rollData[0].name} 
           price={this.state.rollData[0].price}
           addToCart={this.showCart}  /> 
         <Roll 
           rollIndex={1}
-          imageURL={apple}
+          imageURL={this.state.rollData[1].imageURL}
           rollName={this.state.rollData[1].name} 
           price={this.state.rollData[1].price}
           addToCart={this.showCart}  /> 
         <Roll 
           rollIndex={2}
-          imageURL={raisin}
+          imageURL={this.state.rollData[2].imageURL}
           rollName={this.state.rollData[2].name} 
           price={this.state.rollData[2].price}
           addToCart={this.showCart}    />
@@ -113,19 +120,19 @@ class HomePage extends Component {
       <div className="list">
         <Roll 
           rollIndex={3}
-          imageURL={walnut} 
+          imageURL={this.state.rollData[3].imageURL}
           rollName={this.state.rollData[3].name} 
           price={this.state.rollData[3].price}
           addToCart={this.showCart}    />
         <Roll 
           rollIndex={4}
-          imageURL={chocolate}
+          imageURL={this.state.rollData[4].imageURL}
           rollName={this.state.rollData[4].name} 
           price={this.state.rollData[4].price}
           addToCart={this.showCart}    />
         <Roll 
           rollIndex={5}
-          imageURL={strawberry}
+          imageURL={this.state.rollData[5].imageURL}
           rollName={this.state.rollData[5].name} 
           price={this.state.rollData[5].price}
           addToCart={this.showCart}    />

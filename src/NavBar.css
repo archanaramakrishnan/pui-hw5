@@ -1,8 +1,24 @@
+
+
+.cart {
+  visibility: collapse; 
+  text-align: left;
+}
+
+.cart.expanded {
+  visibility: visible;
+  font-size: x-large;
+}
+
 #cart-status {
   padding-top: 12px;
   padding-right: 350px;
   text-align: right;
   font-size: 14px;
+}
+
+.search {
+    text-align: left;
 }
 
 .tagline {
