@@ -106,7 +106,6 @@ class Roll extends Component {
           <b className="options-label price-label">$ {this.calculatePrice()} </b>
           <div className="options">
             <button type="button" className="add-to-cart" onClick={() => this.props.addToCart(this.props.rollIndex, this.state.name, this.state.glazing, this.state.packSize, this.calculatePrice())}> Add to cart </button> 
-            {/* onclick this.props.func(glaze, calculated price, packSize) */}
           </div>
         </div>
       </div>

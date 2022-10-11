@@ -19,7 +19,7 @@ class HomePage extends Component {
       cartTotalPrice: 0,
       currentRoll: {},
       searchTerm: "",
-      sortTerm: "Name",
+      sortTerm: "name",
       rollData: [
         {
           name: "Original cinammon roll",
@@ -72,10 +72,11 @@ class HomePage extends Component {
       imageURL: this.state.rollData[rollIndex].imageURL,
       index: this.state.cart.length
     }
+    console.log("this.state.rollData", this.state.rollData)
     this.setState(prevState => ({
       ...prevState,
       cartTotalPrice: prevState.cartTotalPrice + Number(roll.price),
-      cart: [...prevState.cart, roll],
+      cart: [...prevState.cart.sort, roll],
       currentRoll: roll
     }));
   }
@@ -86,6 +87,15 @@ class HomePage extends Component {
       ...prevState,
       sortTerm: selectedSort
     }));
+    //flipped keys because react has a delay in state change
+    if(this.state.sortTerm === "price")
+    {
+      this.state.rollData.sort((a, b) => a.name > b.name ? 1 : -1);
+    }
+    else if(this.state.sortTerm === "name") {
+      this.state.rollData.sort((a, b) => a.price > b.price ? 1 : -1);
+    }
+    
   };
 
   removeFromCart = (rollIndex) => {
@@ -120,8 +130,8 @@ class HomePage extends Component {
             </div>
             <div className="options align-right">
             <p></p>Sort by:<select name="sort" value={this.state.sortTerm} onChange={this.handleSortChange}>
-                <option value="Name">Name</option>
-                <option value="Base Price">Base Price</option>
+                <option value="name">Name</option>
+                <option value="price">Base Price</option>
               </select>
             </div>
           </div>
@@ -130,7 +140,7 @@ class HomePage extends Component {
         
                   
         <div className="list">
-          {console.log("SORT", this.state.sortTerm)}
+          
           {this.state.rollData.map(
             (roll, index) => {
               if ((this.state.searchTerm === "") || (roll.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))) {
